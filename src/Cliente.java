@@ -8,7 +8,7 @@ public class Cliente {
     public static void main(String[] args) {
         try (DatagramSocket st = new DatagramSocket()) {
 
-            for (int i = 0; i < 3; i++) {
+            while (true){
 
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Dame un número para intentar adivinar: ");
@@ -26,17 +26,19 @@ public class Cliente {
                         st.receive(respuesta);
                         String mensaje = new String(espacio, 0, respuesta.getLength(), StandardCharsets.UTF_8);
                         System.out.println(mensaje);
-                        if (mensaje.startsWith("Adivinaste")) {
+                        if (mensaje.startsWith("ACIERTO") || mensaje.equals("OK Hasta luego") || mensaje.equals("PERDISTE")) {
                             break;
                         }
 
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
+                        break;
 
                     }
 
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
+                    break;
                 }
             }
 

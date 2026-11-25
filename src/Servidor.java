@@ -8,9 +8,8 @@ public class Servidor {
     public Random n_random;
     public int numero;
 
-    public Servidor(Random n_random, int numero) {
+    public Servidor(Random n_random) {
         this.n_random = n_random;
-        this.numero = numero;
     }
 
     public void num() {
@@ -35,31 +34,39 @@ public class Servidor {
                 int adivinar = 0;
                 try {
                     adivinar = Integer.parseInt(texto.trim());
+
                 } catch (NumberFormatException e) {
                     String error = "ERR Comando no válido";
                     System.out.println(error);
                     byte[] respuesta = error.getBytes(StandardCharsets.UTF_8);
                     dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
-                    break;
+                    continue;
+
                 }
 
-
+                if (adivinar < 1 || adivinar > 100) {
+                    String error = "ERR Comando no válido";
+                    System.out.println(error);
+                    byte[] respuesta = error.getBytes(StandardCharsets.UTF_8);
+                    dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
+                    continue;
+                }
 
                 String mensaje = "";
 
                 if (adivinar > numero) {
                     cuenta++;
-                    mensaje = "Es mayor que " + adivinar + " te quedan " + (3-cuenta) + " intentos";
+                    mensaje = "MENOR";
                 }
 
                 else if (adivinar < numero) {
                     cuenta++;
-                    mensaje = "Es menor que " + adivinar + " te quedan " + (3-cuenta) + " intentos";
+                    mensaje = "MAYOR";
                 }
 
                 else if (adivinar == numero) {
                     cuenta++;
-                    mensaje = "Adivinaste en: " + cuenta + " intentos";
+                    mensaje = "ACIERTO en " + cuenta + " intentos";
                 }
 
 
@@ -83,4 +90,9 @@ public class Servidor {
         }
 
     }
+    public static void main(String[] args) {
+        Servidor servidor = new Servidor(new Random());
+        servidor.num();
+    }
+
 }
