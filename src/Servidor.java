@@ -34,14 +34,12 @@ public class Servidor {
                 int adivinar = 0;
                 try {
                     adivinar = Integer.parseInt(texto.trim());
-
                 } catch (NumberFormatException e) {
                     String error = "ERR Comando no válido";
                     System.out.println(error);
                     byte[] respuesta = error.getBytes(StandardCharsets.UTF_8);
                     dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
                     continue;
-
                 }
 
                 if (adivinar < 1 || adivinar > 100) {
@@ -69,18 +67,12 @@ public class Servidor {
                     mensaje = "ACIERTO en " + cuenta + " intentos";
                 }
 
-
-                if (cuenta == 3 && adivinar != numero) {
-                    mensaje = "PERDISTE";
-                }
-
                 System.out.println(mensaje);
                 byte[] respuesta = mensaje.getBytes(StandardCharsets.UTF_8);
 
-
                 dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
 
-                if (adivinar == numero || cuenta == 3) {
+                if (adivinar == numero) {
                     break;
                 }
 
@@ -90,9 +82,10 @@ public class Servidor {
         }
 
     }
+
     public static void main(String[] args) {
-        Servidor servidor = new Servidor(new Random());
-        servidor.num();
+        Servidor s = new Servidor(new Random());
+        s.num();
     }
 
 }

@@ -8,7 +8,7 @@ public class Cliente {
     public static void main(String[] args) {
         try (DatagramSocket st = new DatagramSocket()) {
 
-            while (true){
+            while (true) {
 
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Dame un número para intentar adivinar: ");
@@ -26,7 +26,7 @@ public class Cliente {
                         st.receive(respuesta);
                         String mensaje = new String(espacio, 0, respuesta.getLength(), StandardCharsets.UTF_8);
                         System.out.println(mensaje);
-                        if (mensaje.startsWith("ACIERTO") || mensaje.equals("OK Hasta luego") || mensaje.equals("PERDISTE")) {
+                        if (mensaje.startsWith("ACIERTO") || mensaje.equals("OK Hasta luego")) {
                             break;
                         }
 
