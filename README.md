@@ -16,4 +16,8 @@
 
 Al hacer Ctrl + C no sale ningún error, simplemente cierra la conexión
 
+### Declaración de uso de IA
+
+1 -> Utilicé la IA "Gemini" para que me dijera que ajuste tenía que hacer en el comando nc para que funcionara en mi código. **PROMPT**: "Tengo un código funcionando bajo UDP. Para conectarme con el servidor uso el cmdlet nc, que opción tengo que añadirle para que funcione."
+
 ![5](PSP%20CAPS/Captura%20desde%202026-11-26%2008-45-21.png)
