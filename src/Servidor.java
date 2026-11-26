@@ -24,7 +24,7 @@ public class Servidor {
                 String texto = new String(td.getData(), 0, td.getLength(), StandardCharsets.UTF_8);
 
                 if (texto.trim().equalsIgnoreCase("ADIOS")) {
-                    String despedida = "OK Hasta luego";
+                    String despedida = "OK Hasta luego\n";
                     System.out.println(despedida);
                     byte[] respuesta = despedida.getBytes(StandardCharsets.UTF_8);
                     dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
@@ -35,7 +35,7 @@ public class Servidor {
                 try {
                     adivinar = Integer.parseInt(texto.trim());
                 } catch (NumberFormatException e) {
-                    String error = "ERR Comando no válido";
+                    String error = "ERR Comando no válido\n";
                     System.out.println(error);
                     byte[] respuesta = error.getBytes(StandardCharsets.UTF_8);
                     dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
@@ -43,7 +43,7 @@ public class Servidor {
                 }
 
                 if (adivinar < 1 || adivinar > 100) {
-                    String error = "ERR Comando no válido";
+                    String error = "ERR Comando no válido\n";
                     System.out.println(error);
                     byte[] respuesta = error.getBytes(StandardCharsets.UTF_8);
                     dt.send(new DatagramPacket(respuesta, respuesta.length, td.getAddress(), td.getPort()));
@@ -54,12 +54,12 @@ public class Servidor {
 
                 if (adivinar > numero) {
                     cuenta++;
-                    mensaje = "MENOR";
+                    mensaje = "MENOR\n";
                 }
 
                 else if (adivinar < numero) {
                     cuenta++;
-                    mensaje = "MAYOR";
+                    mensaje = "MAYOR\n";
                 }
 
                 else if (adivinar == numero) {
